@@ -9,10 +9,10 @@ namespace Pokki.Classes
     class Pokemon_Base
     {
         protected string name;
-        protected Pokemon_Base nextEvolution;
-        protected UInt16 levelNextEvolution;
+        protected string nextEvolution;
+        protected int levelNextEvolution;
 
-        public Pokemon_Base(string name, Pokemon_Base nextEvolution, UInt16 levelNextEvolution)
+        public Pokemon_Base(string name, string nextEvolution, int levelNextEvolution)
         {
             this.name = name;
             this.nextEvolution = nextEvolution;
@@ -26,12 +26,12 @@ namespace Pokki.Classes
             return this.name;
         }
 
-        public Pokemon_Base NextEvolution()
+        public string NextEvolution()
         {
             return this.nextEvolution;
         }
 
-        public UInt16 LevelNextEvolution()
+        public int LevelNextEvolution()
         {
             return this.levelNextEvolution;
         }

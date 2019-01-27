@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokki"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Pokki" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="Tb_logs" Grid.Row="0" TextWrapping="Wrap" Margin="5" IsEnabled="False"/>
+            <TextBox Name="Tb_input" Grid.Row="1" Margin="5" Height="24" TextChanged="Tb_input_TextChanged"></TextBox>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0" Margin="5">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Name="Tb_Stats"></TextBlock>
+
+            <Button Name="Btn_EarnXP" Grid.Row="1" Content="Earn XP" Margin="5" Click="Btn_EarnXP_Click"></Button>
+        </Grid>
     </Grid>
 </Window>

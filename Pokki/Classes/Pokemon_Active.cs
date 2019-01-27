@@ -8,8 +8,8 @@ namespace Pokki.Classes
 {
     class Pokemon_Active : Pokemon_Base
     {
-        private UInt32 xpActual;
-        private UInt32 levelActual;
+        private int xpActual;
+        private int levelActual;
 
         public Pokemon_Active(Pokemon_Base pokemon) : base(pokemon.Name(), pokemon.NextEvolution(), pokemon.LevelNextEvolution())
         {
@@ -17,14 +17,26 @@ namespace Pokki.Classes
             levelActual = 1;
         }
 
-        public UInt32 XpActual()
+
+        #region "GET functions"
+
+        public int XpActual()
         {
             return xpActual;
         }
 
-        public UInt32 LevelActual()
+        public int LevelActual()
         {
             return levelActual;
         }
+
+        #endregion
+
+
+        #region "SET functions"
+
+
+
+        #endregion
     }
 }

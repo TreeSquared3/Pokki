@@ -6,56 +6,43 @@ using System.Threading.Tasks;
 
 namespace Pokki.Classes
 {
-    class Pokedex
+    static class Pokedex
     {
-        private Dictionary<String, Pokemon_Base> pokedex; //stores info about all pokemon in the game
-        private Dictionary<UInt32, UInt32> levelUpList; //stores the required xp for the next level for the current level
-
-
-        #region "constructor"
-
-        public Pokedex()
+        
+        private static Dictionary<String, Pokemon_Base> pokedex = new Dictionary<string, Pokemon_Base>() //stores info about all pokemon in the game
         {
-            InitializePokemon();
-            InitializeLevelUpList();
-        }
-               
-        private void InitializePokemon()
+            { "Raticate", new Pokemon_Base("Raticate", null, 0)},
+            { "Rattata", new Pokemon_Base("Rattata", "Raticate", 20)},
+
+            { "Blastoise", new Pokemon_Base("Blastoise", null, 0)},
+            { "Wartortle", new Pokemon_Base("Wartortle", "Blastoise", 36)},
+            { "Squirtle", new Pokemon_Base("Squirtle", "Wartortle", 16)},
+
+            { "Venusaur", new Pokemon_Base("Venusaur", null, 0)},
+            { "Ivysaur", new Pokemon_Base("Ivysaur", "Venusaur", 32)},
+            { "Bulbasaur", new Pokemon_Base("Bulbasaur", "Ivysaur", 16)},
+
+            { "Charizard", new Pokemon_Base("Charizard", null, 0)},
+            { "Charmelon", new Pokemon_Base("Charmelon", "Charizard", 36)},
+            { "Charmander", new Pokemon_Base("Charmander", "Charmelon", 16)}
+        };
+
+        private static int[] levelUpList = new int[] //stores the required xp for the next level for the current level
         {
-            pokedex.Add("Raticate", new Pokemon_Base("Raticate", null, 0));
-            pokedex.Add("Rattata", new Pokemon_Base("Rattata", GetPokemon("Raticate"), 20));
+            // for now values will be added at startup through the InitializeLevelUpList() method in MainWindow.xaml
+        };
 
-            pokedex.Add("Blastoise", new Pokemon_Base("Blastoise", null, 0));
-            pokedex.Add("Wartortle", new Pokemon_Base("Wartortle", GetPokemon("Blastoise"), 36));
-            pokedex.Add("Squirtle", new Pokemon_Base("Squirtle", GetPokemon("Wartortle"), 16));
 
-            pokedex.Add("Venusaur", new Pokemon_Base("Venusaur", null, 0));
-            pokedex.Add("Ivysaur", new Pokemon_Base("Ivysaur", GetPokemon("Venusaur"), 32));
-            pokedex.Add("Bulbasaur", new Pokemon_Base("Bulbasaur", GetPokemon("Ivysaur"), 16));
+        #region "GET functions"
 
-            pokedex.Add("Charizard", new Pokemon_Base("Charizard", null, 0));
-            pokedex.Add("Charmelon", new Pokemon_Base("Charmelon", GetPokemon("Charizard"), 36));
-            pokedex.Add("Charmander", new Pokemon_Base("Charmander", GetPokemon("Charmelon"), 16));
-        }
-
-        private void InitializeLevelUpList()
+        public static int GetLevelUpXpRequired(UInt32 currentLevel)
         {
-            levelUpList.Add(1, 200);
+            if (currentLevel > levelUpList.Count()) return -1;
 
-            for(UInt32 i=2;i<=100;i++)
-            {
-                UInt32 nextLevel;
-
-                levelUpList.TryGetValue(i - 1, out nextLevel);
-
-                levelUpList.Add(i, Convert.ToUInt32(nextLevel * 1.2));
-            }
+            return levelUpList[currentLevel - 1];
         }
 
-        #endregion
-
-               
-        public Pokemon_Base GetPokemon(String name)
+        public static Pokemon_Base GetPokemon(String name)
         {
             Pokemon_Base pokemon;
 
@@ -67,9 +54,23 @@ namespace Pokki.Classes
             return null;
         }
 
-        public Boolean DoesPokemonExist(String name)
+        public static Boolean DoesPokemonExist(String name)
         {
             return pokedex.ContainsKey(name);
         }
+
+        #endregion
+
+
+        #region "SET functions"
+
+        public static void SetLevelUpList(int[] levelUpListNew)
+        {
+            levelUpList = levelUpListNew;
+        }
+
+        #endregion
+
+        
     }
 }
